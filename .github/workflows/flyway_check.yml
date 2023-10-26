@@ -1,4 +1,4 @@
-name: feature check
+name: test migration
 on:
   push:
     branches:
@@ -6,7 +6,6 @@ on:
   pull_request:
     branches:
     - staging
-    - master
 jobs:
   test:
     runs-on: ubuntu-latest
