@@ -1,8 +1,8 @@
 pipeline {
   agent any 
   environment{
-      repo = 'db-01'
-      github_repo = 'https://github.com/nadianix25/db-01.git'
+      repo = 'db-postgresql-01'
+      github_repo = 'https://github.com/nadianix25/db-postgresql-01.git'
       prodURL ='jdbc:postgresql://db01-prod.c4u0iygcr8b5.us-east-1.rds.amazonaws.com:5432/postgres'
       staURL ='jdbc:postgresql://db01-dev.c4u0iygcr8b5.us-east-1.rds.amazonaws.com:5432/postgres'
       target = "${target_env}"
