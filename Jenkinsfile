@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Prepare') {
       steps {
-        sh 'ls -a'
+        sh 'rm -r ${repo}'
         sh 'docker run --rm flyway/flyway:8.5.1 version'
         sh 'git clone --single-branch --branch ${branch} ${github_repo}'
       }
