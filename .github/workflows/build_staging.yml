@@ -1,0 +1,11 @@
+name: build staging
+on:
+  push:
+    branches:
+    - 'staging'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${GITHUB_REF#refs/heads/}
+      - run: curl -X POST http://ec2-54-91-8-199.compute-1.amazonaws.com:8080/job/db-postgresql-01/buildWithParameters --user remotetriger:${{ secrets.REMTOKEN }} --data branch=staging
