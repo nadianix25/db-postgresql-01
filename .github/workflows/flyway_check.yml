@@ -47,5 +47,5 @@ jobs:
           FLYWAY_USER: postgres
           FLYWAY_PASSWORD: postgres
           FLYWAY_VALIDATE_MIGRATION_NAMING: true
-        run: flyway check
+        run: flyway validate
 
