@@ -1,12 +1,14 @@
-name: feature check
+name: Feature Check
+
 on:
   push:
     branches:
-    - 'feature/**'
+      - 'feature/**'
   pull_request:
     branches:
-    - staging
-    - master
+      - staging
+      - master
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,13 +24,23 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: joshuaavalon/flyway-action@v3.0.0
-        with:
-          url: jdbc:postgresql://postgres:5432/postgres
-          user: postgres
-          password: postgres
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Install Flyway
+        run: |
+          curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.5.11/flyway-commandline-8.5.11-linux-x64.tar.gz | tar xz
+          sudo ln -s $(pwd)/flyway-8.5.11/flyway /usr/local/bin/flyway
+
+      - name: Run Flyway migrations
         env:
+          FLYWAY_URL: jdbc:postgresql://localhost:5432/postgres
+          FLYWAY_USER: postgres
+          FLYWAY_PASSWORD: postgres
           FLYWAY_VALIDATE_MIGRATION_NAMING: true
-      - run: echo 'testing'
+        run: flyway migrate
+
+      - name: Testing placeholder
+        run: echo 'Testing'
