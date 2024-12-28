@@ -26,14 +26,27 @@ pipeline {
             }
         }
 
-        stage('Install Flyway') {
-            steps {
-                echo 'Installing Flyway...'
-                sh '''
-                curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.1.0/flyway-commandline-11.1.0-linux-x64.tar.gz | tar xz
-                '''
-            }
-        }
+stage('Install Flyway') {
+    steps {
+        echo 'Installing Flyway...'
+        sh '''
+        # Set up Flyway version
+        FLYWAY_VERSION=11.1.0
+
+        # Download Flyway
+        curl -L -o flyway.tar.gz https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/$FLYWAY_VERSION/flyway-commandline-$FLYWAY_VERSION-linux-x64.tar.gz
+
+        # Extract Flyway into workspace
+        tar -xzf flyway.tar.gz -C $WORKSPACE
+        
+        # Use Flyway directly from workspace
+        export PATH=$WORKSPACE/flyway-$FLYWAY_VERSION:$PATH
+
+        # Clean up downloaded file
+        rm -f flyway.tar.gz
+        '''
+    }
+}
 
         stage('Validate Migrations') {
             steps {
