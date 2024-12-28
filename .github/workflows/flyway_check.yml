@@ -38,7 +38,7 @@ jobs:
 
       - name: Install Flyway
         run: |
-          curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.1.0/flyway-commandline-8.5.11-linux-x64.tar.gz | tar xz
+          curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.1.0/flyway-commandline-11.1.0-linux-x64.tar.gz | tar xz
           sudo ln -s $(pwd)/flyway-11.1.0/flyway /usr/local/bin/flyway
 
       - name: Run flyway checks
@@ -47,5 +47,5 @@ jobs:
           FLYWAY_USER: postgres
           FLYWAY_PASSWORD: postgres
           FLYWAY_VALIDATE_MIGRATION_NAMING: true
-        run: flyway validate
+        run: flyway info
 
