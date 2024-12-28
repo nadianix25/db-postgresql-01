@@ -11,6 +11,8 @@ pipeline {
         DB_URL = 'jdbc:postgresql://db-postgresql-01.c4u0iygcr8b5.us-east-1.rds.amazonaws.com'
         DB_USER = credentials('db-username')  // Jenkins credentials ID for the database username
         DB_PASSWORD = credentials('db-password')  // Jenkins credentials ID for the database password
+        FLYWAY_HOME = '/var/lib/jenkins/workspace/db01-prostres/flyway-11.1.0'
+        PATH = "${FLYWAY_HOME}:${env.PATH}"
     }
 
     stages {
@@ -49,13 +51,13 @@ stage('Install Flyway') {
 }
 
         stage('Validate Migrations') {
-            steps {
-                echo 'Validating migrations...'
-                sh '''
-                flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASSWORD \
-                    -locations=filesystem:sql/migrations validate
-                '''
-            }
+          steps {
+             echo 'Validating migrations...'
+             sh '''
+              flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASSWORD \
+                -locations=filesystem:sql/ validate
+              '''
+          }
         }
 
         stage('Migrate Database') {
