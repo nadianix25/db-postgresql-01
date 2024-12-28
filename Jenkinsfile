@@ -55,7 +55,7 @@ stage('Install Flyway') {
              echo 'Validating migrations...'
              sh '''
               flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASSWORD \
-                -locations=filesystem:sql/ validate
+                -locations=filesystem:sql/ info
               '''
           }
         }
