@@ -38,8 +38,8 @@ jobs:
 
       - name: Install Flyway
         run: |
-          curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/8.5.11/flyway-commandline-8.5.11-linux-x64.tar.gz | tar xz
-          sudo ln -s $(pwd)/flyway-8.5.11/flyway /usr/local/bin/flyway
+          curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.1.0/flyway-commandline-8.5.11-linux-x64.tar.gz | tar xz
+          sudo ln -s $(pwd)/flyway-11.1.0/flyway /usr/local/bin/flyway
 
       - name: Run flyway checks
         env:
