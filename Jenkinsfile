@@ -31,7 +31,6 @@ pipeline {
                 echo 'Installing Flyway...'
                 sh '''
                 curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/11.1.0/flyway-commandline-11.1.0-linux-x64.tar.gz | tar xz
-                ln -s $(pwd)/flyway-11.1.0/flyway /usr/local/bin/flyway
                 '''
             }
         }
