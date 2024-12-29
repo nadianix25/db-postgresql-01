@@ -1,3 +1,1 @@
-Alter TABLE products (
-    ADD COLUMN stock_quantity Int 
-);
+Alter TABLE products ADD COLUMN stock_quantity Int; 
