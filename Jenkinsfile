@@ -13,6 +13,7 @@ pipeline {
         DB_PASSWORD = credentials('db-password')  // Jenkins credentials ID for the database password
         FLYWAY_HOME = '/var/lib/jenkins/workspace/db01-prostres/flyway-11.1.0'
         PATH = "${FLYWAY_HOME}:${env.PATH}"
+        SCHEMA = 'public'
     }
 
     stages {
@@ -55,7 +56,7 @@ stage('Install Flyway') {
              echo 'Validating migrations...'
              sh '''
               flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASSWORD \
-                -locations=filesystem:sql/ info
+                -schemas=$SCHEMA -locations=filesystem:sql/ info
               '''
           }
         }
@@ -65,7 +66,7 @@ stage('Install Flyway') {
                 echo 'Applying database migrations...'
                 sh '''
                 flyway -url=$DB_URL -user=$DB_USER -password=$DB_PASSWORD \
-                    -locations=filesystem:sql/migrations migrate
+                    -schemas=$SCHEMA -locations=filesystem:sql/migrations migrate
                 '''
             }
         }
