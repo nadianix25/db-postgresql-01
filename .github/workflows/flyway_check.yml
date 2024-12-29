@@ -55,7 +55,7 @@ jobs:
           FLYWAY_USER: postgres
           FLYWAY_PASSWORD: postgres
           FLYWAY_VALIDATE_MIGRATION_NAMING: true
-        run: flyway -locations=filesystem:sql/ -validateMigrationNaming=true validate
+        run: flyway -locations=filesystem:sql/ -validateMigrationNaming=true -ignoreMigrationPatterns='*:pending' validate
 
       - name: Run flyway migrate
         env:
